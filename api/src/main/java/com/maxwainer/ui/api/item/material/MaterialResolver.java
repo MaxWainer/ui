@@ -30,36 +30,51 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.maxwainer.ui.api.exception;
+package com.maxwainer.ui.api.item.material;
 
-import com.maxwainer.ui.api.abstraction.UI;
-import com.maxwainer.ui.api.user.UIUser;
+import com.maxwainer.ui.api.exception.MaterialOutOfBoundException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class UIAlreadyOpenException extends RuntimeException implements UIException {
+/**
+ * Helps to resolve materials by internal id system
+ *
+ * @param <T> Enum which hold every material
+ */
+public interface MaterialResolver<T extends Enum<T>> {
 
-  private final UI<?> ui;
-  private final UIUser<?> user;
+  /**
+   * Get material by internal id system
+   *
+   * @param value Value which is in version range
+   * @return Resolved material value
+   * @throws MaterialOutOfBoundException If entered value out of allowed range (Version-related
+   *                                     thing)
+   */
+  @Nullable T resolveByValue(final short value) throws MaterialOutOfBoundException;
 
-  public UIAlreadyOpenException(@NotNull String message, @Nullable UI<?> ui,
-      @Nullable UIUser<?> user) {
-    super(String.format(message, ui, user));
-    this.ui = ui;
-    this.user = user;
+  /**
+   * Get material by internal id system
+   *
+   * @param value Value which is in version range
+   * @return Resolved material value
+   */
+  default @NotNull T resolveMaterial(final short value) {
+    final T nullMaterial = getNullMaterial();
+    try {
+      final T outValue = resolveByValue(value);
+
+      return outValue == null ? nullMaterial : outValue;
+    } catch (MaterialOutOfBoundException ignored) {
+    }
+    return nullMaterial;
   }
 
-  public UIAlreadyOpenException(@Nullable UI<?> ui, @Nullable UIUser<?> user) {
-    this("Generated an exception while opening ui for user %s, initiator %s", ui, user);
-  }
+  /**
+   * Get material which is exists on every supported version
+   *
+   * @return Null material, such as STONE
+   */
+  @NotNull T getNullMaterial();
 
-  @Override
-  public @Nullable UI<?> thrownUI() {
-    return ui;
-  }
-
-  @Override
-  public @Nullable UIUser<?> thrownUser() {
-    return user;
-  }
 }

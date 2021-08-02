@@ -30,36 +30,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.maxwainer.ui.api.exception;
+package com.maxwainer.ui.api.customizer;
 
-import com.maxwainer.ui.api.abstraction.UI;
-import com.maxwainer.ui.api.user.UIUser;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class UIAlreadyOpenException extends RuntimeException implements UIException {
+public interface CustomizerModule<T extends Customizer> {
 
-  private final UI<?> ui;
-  private final UIUser<?> user;
+  @NotNull T getParentCustomizer();
 
-  public UIAlreadyOpenException(@NotNull String message, @Nullable UI<?> ui,
-      @Nullable UIUser<?> user) {
-    super(String.format(message, ui, user));
-    this.ui = ui;
-    this.user = user;
-  }
 
-  public UIAlreadyOpenException(@Nullable UI<?> ui, @Nullable UIUser<?> user) {
-    this("Generated an exception while opening ui for user %s, initiator %s", ui, user);
-  }
 
-  @Override
-  public @Nullable UI<?> thrownUI() {
-    return ui;
-  }
-
-  @Override
-  public @Nullable UIUser<?> thrownUser() {
-    return user;
-  }
 }

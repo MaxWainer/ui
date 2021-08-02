@@ -30,36 +30,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.maxwainer.ui.api.exception;
+package com.maxwainer.ui.api.utils;
 
-import com.maxwainer.ui.api.abstraction.UI;
-import com.maxwainer.ui.api.user.UIUser;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+/**
+ * Functional interface which allow you to create builders
+ *
+ * @param <T> Builder
+ * @param <R> Returning value
+ */
+@FunctionalInterface
+public interface Builder<T, R> {
 
-public class UIAlreadyOpenException extends RuntimeException implements UIException {
+  /**
+   * @param t Buildable variable (Can be null)
+   * @return Built object
+   */
+  R build(T t);
 
-  private final UI<?> ui;
-  private final UIUser<?> user;
-
-  public UIAlreadyOpenException(@NotNull String message, @Nullable UI<?> ui,
-      @Nullable UIUser<?> user) {
-    super(String.format(message, ui, user));
-    this.ui = ui;
-    this.user = user;
-  }
-
-  public UIAlreadyOpenException(@Nullable UI<?> ui, @Nullable UIUser<?> user) {
-    this("Generated an exception while opening ui for user %s, initiator %s", ui, user);
-  }
-
-  @Override
-  public @Nullable UI<?> thrownUI() {
-    return ui;
-  }
-
-  @Override
-  public @Nullable UIUser<?> thrownUser() {
-    return user;
-  }
 }
