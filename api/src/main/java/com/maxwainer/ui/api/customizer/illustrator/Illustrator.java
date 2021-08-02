@@ -33,10 +33,20 @@
 package com.maxwainer.ui.api.customizer.illustrator;
 
 import com.maxwainer.ui.api.customizer.Customizer;
-import com.maxwainer.ui.api.customizer.CustomizerModule;
+import com.maxwainer.ui.api.customizer.illustrator.marker.MarkerOptions;
+import com.maxwainer.ui.api.customizer.illustrator.marker.SpecialMarker;
+import com.maxwainer.ui.api.customizer.illustrator.option.OptionsHolder;
+import com.maxwainer.ui.api.customizer.illustrator.option.OptionsResolver;
+import com.maxwainer.ui.api.resolver.Resolvable;
+import org.jetbrains.annotations.NotNull;
 
-public interface Illustrator<T extends Customizer> extends CustomizerModule<T> {
+public interface Illustrator<I extends Illustrator, T extends Customizer, O extends OptionsHolder> extends
+    Resolvable {
 
+  I rows(final @NotNull String... rows);
 
+  I options(final @NotNull OptionsResolver<O> optionsResolver);
+
+  MarkerOptions specialMarker(final @NotNull Class<? extends SpecialMarker> markerClass);
 
 }

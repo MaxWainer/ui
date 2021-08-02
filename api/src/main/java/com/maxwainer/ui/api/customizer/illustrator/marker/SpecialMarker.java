@@ -30,14 +30,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.maxwainer.ui.api.customizer;
+package com.maxwainer.ui.api.customizer.illustrator.marker;
 
-import com.maxwainer.ui.api.customizer.illustrator.Illustrator;
-import com.maxwainer.ui.api.resolver.Resolver;
-import org.jetbrains.annotations.NotNull;
-
-public interface Customizer<T extends Customizer, I extends Illustrator> {
-
-  T illustrator(final @NotNull Resolver<I> illustrator);
+public interface SpecialMarker {
 
 }

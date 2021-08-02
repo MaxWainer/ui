@@ -30,14 +30,27 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.maxwainer.ui.api.customizer;
+package com.maxwainer.ui.api.customizer.illustrator.option;
 
-import com.maxwainer.ui.api.customizer.illustrator.Illustrator;
-import com.maxwainer.ui.api.resolver.Resolver;
+import java.util.regex.Pattern;
 import org.jetbrains.annotations.NotNull;
 
-public interface Customizer<T extends Customizer, I extends Illustrator> {
+public interface OptionsHolder {
 
-  T illustrator(final @NotNull Resolver<I> illustrator);
+  OptionsHolder skipSpace(final boolean skip);
+
+  OptionsHolder globalSpecialMarkerPattern(final @NotNull Pattern pattern);
+
+  OptionsHolder usePerMarkerPattern(final boolean use);
+
+  OptionsHolder emptyCharacter(final char airChar);
+
+  char getAirChar();
+
+  @NotNull Pattern getGlobalSpecialMarkerPattern();
+
+  boolean isSkippingSpace();
+
+  boolean isPerMarkerPattern();
 
 }

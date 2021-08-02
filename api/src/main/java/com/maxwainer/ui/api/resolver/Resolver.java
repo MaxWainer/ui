@@ -30,14 +30,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.maxwainer.ui.api.customizer;
+package com.maxwainer.ui.api.resolver;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface CustomizerModule<T extends Customizer> {
+@FunctionalInterface
+public interface Resolver<T extends Resolvable> {
 
-  @NotNull T getParentCustomizer();
-
-
+  void resolve(final @NotNull T resolvable);
 
 }

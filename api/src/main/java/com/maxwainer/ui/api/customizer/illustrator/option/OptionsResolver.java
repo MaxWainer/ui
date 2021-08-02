@@ -30,14 +30,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.maxwainer.ui.api.customizer;
+package com.maxwainer.ui.api.customizer.illustrator.option;
 
-import com.maxwainer.ui.api.customizer.illustrator.Illustrator;
-import com.maxwainer.ui.api.resolver.Resolver;
 import org.jetbrains.annotations.NotNull;
 
-public interface Customizer<T extends Customizer, I extends Illustrator> {
+@FunctionalInterface
+public interface OptionsResolver<T extends OptionsHolder> {
 
-  T illustrator(final @NotNull Resolver<I> illustrator);
+  void applyOptions(final @NotNull T holder);
 
 }

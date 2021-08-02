@@ -30,12 +30,20 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.maxwainer.ui.api;
+package com.maxwainer.ui.api.customizer.illustrator.marker;
 
-public class UIModule {
+import java.util.regex.Pattern;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-  void f() {
+public interface MarkerOptions extends Comparable<MarkerOptions> {
 
-  }
+  MarkerOptions pattern(final @NotNull Pattern pattern);
+
+  MarkerOptions exactElement(final @NotNull String element);
+
+  @Nullable Pattern getPattern();
+
+  @Nullable String getElement();
 
 }

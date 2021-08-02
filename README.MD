@@ -10,12 +10,12 @@ ExampleProvider.getInstance()
     .customize(customizer -> {
       customizer.title("Example title");
       customizer.illustrator(illustrator -> {
-        illustrator.specialMarker("'next page'", NextPageMarker.class);
+        illustrator.specialMarker(NextPageMarker.class);
         illustrator.options(options -> options.skipSpace(false));
         illustrator.rows(
             "#########",
             "|        |",
-            "########'next page'"
+            "########'next page'" // Default pattern is: '\b(marker [0-9]+)\b'
             
         );
       });
